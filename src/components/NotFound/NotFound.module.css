@@ -1,0 +1,7 @@
+.notFoundContainer {
+    display: flex;
+    justify-content: center;
+
+    color: var(--textColor-error);
+    background-color: var(--bgColor-error);
+}

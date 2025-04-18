@@ -1,0 +1,14 @@
+.heroImageContainer {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    min-height: 400px;
+}
+.heroHeaderContainer h1 {
+    font-size: 4em;
+    width: 400px;
+    margin-left: 30%;
+}
+.heroTextContainer {
+    background-color: var(--bgColor-main);
+}

@@ -1,0 +1,62 @@
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2%;
+    color: var(--textColor-main);
+    background-color: var(--bgColor-secondary);
+}
+header a {
+    color: var(--linkColor);
+}
+header a:hover {
+    color: var(--linkColor-hover);
+}
+header p {
+    margin: 0;
+}
+
+/* Left side of header */
+.headerLeft {
+    display: flex;
+}
+
+/* Navigation bar */
+.headerNavBar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.headerNavBar ul{
+    list-style-type: none;
+    display: flex;
+    white-space: nowrap;
+}
+.headerNavBar ul li {
+    padding: 10px;
+}
+.headerNavBar ul li:hover {
+    background-color: var(--bgColor-main);
+    border-radius: var(--borderRadius-main);
+    cursor: pointer;
+}
+
+/* Right side of header */
+.headerRight {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mobile UI */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        
+    }
+    .headerLeft,
+    .headerRight {
+        display: block;
+        text-align: center;
+    }
+}
