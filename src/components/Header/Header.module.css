@@ -36,7 +36,10 @@ header p {
 .headerNavBar ul li {
     padding: 10px;
 }
-.headerNavBar ul li:hover {
+.headerNavBar a {
+    padding: 10px;
+}
+.headerNavBar a:hover {
     background-color: var(--bgColor-main);
     border-radius: var(--borderRadius-main);
     cursor: pointer;

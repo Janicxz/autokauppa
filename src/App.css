@@ -15,4 +15,9 @@
   --linkColor-hover: #a7a7a7;
 
   --borderRadius-main: 5px;
+  --h1-large: 4em;
+  --h1-normal: 3.5em;
+  --h2-normal: 2em;
+  --fontSize-large: 1.5em;
+  --fontSize-normal: 1em;
 }

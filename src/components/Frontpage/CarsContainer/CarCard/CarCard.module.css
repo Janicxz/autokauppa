@@ -1,0 +1,11 @@
+.CarCard {
+    background-color: var(--bgColor-secondary);
+}
+.CarCardText {
+    text-align: center;
+}
+.CarCardText h3,
+.CarCardText p {
+    
+    color: var(--textColor-main);
+}

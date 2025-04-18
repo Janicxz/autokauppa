@@ -1,0 +1,12 @@
+.CarsContainerRoot {
+    display: flex;
+    justify-content: center;
+}
+.CarsContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px;
+    gap: 30px;
+    max-width: 1300px;
+}

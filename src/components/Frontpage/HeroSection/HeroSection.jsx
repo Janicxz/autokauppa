@@ -11,7 +11,10 @@ const HeroSection = () => {
             </div>
             { /* Hero main text */}
             <div className={styles.heroTextContainer}>
-                <p>tekstiä</p>
+                <div className={styles.heroText}>
+                    <h2>Autokauppa oy</h2>
+                    <p>Olemme Lieksassa sijaitseva autoliike, joka tarjoaa monipuolisen valikoiman uusia ja käytettyjä ajoneuvoja. Asiantunteva henkilökuntamme on sitoutunut avustamaan asiakkaitamme löytämään heidän tarpeitaan vastaavan ratkaisun. Toivotamme teidät tervetulleiksi tutustumaan tarjontaamme.</p>
+                </div>
             </div>
         </div>
     );

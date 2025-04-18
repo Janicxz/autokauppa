@@ -1,3 +1,6 @@
+.heroContainer {
+
+}
 .heroImageContainer {
     display: flex;
     align-items: center;
@@ -5,10 +8,31 @@
     min-height: 400px;
 }
 .heroHeaderContainer h1 {
-    font-size: 4em;
+    font-size: var(--h1-large);
     width: 400px;
     margin-left: 30%;
 }
 .heroTextContainer {
     background-color: var(--bgColor-main);
+    display: flex;
+    justify-content: center;
+}
+.heroText {
+    text-align: center;
+    max-width: 50%;
+}
+.heroText h2 {
+    font-size: var(--h2-normal);
+}
+.heroText p {
+    font-size: var(--fontSize-large);
+}
+
+/* Mobile UI */
+@media screen and (max-width: 768px) {
+    
+    .heroHeaderContainer h1 {
+        font-size: var(--h1-normal);
+        margin: 10px;
+    }
 }
