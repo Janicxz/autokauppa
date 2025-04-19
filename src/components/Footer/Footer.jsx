@@ -1,4 +1,6 @@
 import styles from './Footer.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSquareFacebook, faSquareTwitter } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
     const socialMediaLinks = {
@@ -9,7 +11,9 @@ const Footer = () => {
 
     return (
         <footer className={styles.footer}>
-            <p><a href={socialMediaLinks["twitter"]}>Twitter</a> <a href={socialMediaLinks["facebook"]}>Facebook</a> <a href={socialMediaLinks["nettiauto"]}>Nettiauto</a></p>
+            <a href={socialMediaLinks["nettiauto"]}>Nettiauto</a>
+            <a href={socialMediaLinks["twitter"]}><FontAwesomeIcon icon={faSquareTwitter} size="2x"/></a>
+            <a href={socialMediaLinks["facebook"]}><FontAwesomeIcon icon={faSquareFacebook} size="2x" /></a>
             <p>Autokauppa. Made by Jani Luostarinen 2025.</p>
         </footer>
     );

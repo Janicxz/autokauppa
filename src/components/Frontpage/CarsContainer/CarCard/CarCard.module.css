@@ -1,5 +1,6 @@
 .CarCard {
     background-color: var(--bgColor-secondary);
+    max-width: 300px;
 }
 .CarCardText {
     text-align: center;

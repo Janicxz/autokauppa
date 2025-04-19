@@ -2,4 +2,9 @@ footer {
     color: var(--textColor-main);
     background-color: var(--bgColor-secondary);
     text-align: center;
+    padding: 10px;
+}
+footer a {
+    margin-left: 5px;
+    color: var(--textColor-main);
 }
