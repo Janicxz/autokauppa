@@ -1,5 +1,5 @@
 import styles from './Frontpage.module.css';
-import CarsContainer from './CarsContainer/CarsContainer';
+import CarsContainer from '../CarsList/CarsContainer';
 import HeroSection from './HeroSection/HeroSection';
 
 

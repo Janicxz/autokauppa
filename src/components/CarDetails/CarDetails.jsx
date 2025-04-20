@@ -2,14 +2,18 @@ import styles from './CarDetails.module.css';
 import { API_URL } from '../../config/config.js';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-
+import { UserContext } from '../../hooks/UserContext';
+import { useContext } from 'react';
 const CarDetails = () => {
+    const { userState, setUserState } = useContext(UserContext);
+    
     const [state, setState] = useState({
         carDetails: {},
+        carId: 0,
         loading: true,
         error: false
     });
-    // On init
+    // On mount
     useEffect(() => {
         const getCarDetails = async (carId) => {
             let carDetail = {};
@@ -25,7 +29,7 @@ const CarDetails = () => {
                 apiError = true;
                 errorMsg = 'Virhe auton tietojen lataamisessa.';
             }
-            setState(prevState => ({ ...prevState, loading: false, carDetails: carDetail, error: apiError, errorMessage: errorMsg }));
+            setState(prevState => ({ ...prevState, loading: false, carDetails: carDetail, carId: carId, error: apiError, errorMessage: errorMsg }));
         }
         let carId = new URLSearchParams(window.location.search).get('id');
         carId = parseInt(carId);
@@ -33,6 +37,7 @@ const CarDetails = () => {
         if (isNaN(carId)) {
             console.log("Invalid carId");
             setState(prevState => ({...prevState, loading: false, error: true}));
+            return;
         }
 
         getCarDetails(carId);
@@ -67,6 +72,10 @@ const CarDetails = () => {
                 {state.carDetails.transmission && <p>Vaihteisto: {state.carDetails.transmission}</p>}
                 {state.carDetails.registrationNumber && <p>Rekisterinumero: {state.carDetails.registrationNumber}</p>}
                 {state.carDetails.price && <p>Hinta: {state.carDetails.price} €</p>}
+                {<div className={styles.carDetailsButtons}>
+                    {userState.loggedIn && <button>Muokkaa ilmoitusta</button>}
+                    {userState.loggedIn && <button>Poista ilmoitus</button>}
+                </div>}
             </div>
         </div>
     );

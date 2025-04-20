@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  background-color: var(--bgColor-main);
+  color: var(--textColor-main);
 }
 :root {
   --bgColor-main: #3c5e63;

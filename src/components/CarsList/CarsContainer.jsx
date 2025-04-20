@@ -1,7 +1,7 @@
-import CarCard from './CarCard/CarCard';
+import CarCard from './CarCard/CarCard.jsx';
 import styles from './CarsContainer.module.css';
 import  { useState, useEffect } from 'react';
-import { API_URL } from '../../../config/config.js';
+import { API_URL } from '../../config/config.js';
 import axios from 'axios';
 
 const CarsContainer = () => {
