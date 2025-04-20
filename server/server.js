@@ -38,7 +38,7 @@ app.get('/api/carDetails/:id', (req, res) => {
 app.get('/api/CarsList', (req, res) => {
     console.log('Got request for cars listing');
     // Fake data for cars
-    const cars = [
+    /*const cars = [
         { name: "bmw", description: "E39", price: 3400 },
         { name: "audi", description: "A4", price: 5400 },
         { name: "mercedes", description: "C180", price: 7400 },
@@ -60,7 +60,7 @@ app.get('/api/CarsList', (req, res) => {
         { name: "mitsubishi", description: "Outlander", price: 22400 },
         { name: "suzuki", description: "Vitara", price: 23400 },
         { name: "land rover", description: "Defender", price: 24400 }
-    ];
+    ];*/
     db.query("SELECT * FROM cars", (err, result) => {
         if (err) {
             console.error('Error fetching cars from database:', err);

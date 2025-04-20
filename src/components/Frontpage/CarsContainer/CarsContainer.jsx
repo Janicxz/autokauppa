@@ -29,7 +29,7 @@ const CarsContainer = () => {
             } catch (error) {
                 console.error('Error fetching cars:', error);
                 apiError = true;
-                errorMsg = 'Virhe autojen lataamisessa.';
+                errorMsg = 'Virhe ilmoitusten lataamisessa.';
             }
             setState(prevState => ({ ...prevState, loading: false, cars: carsList, error: apiError, errorMessage: errorMsg }));
         }

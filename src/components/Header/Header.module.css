@@ -29,6 +29,7 @@ header p {
     align-items: center;
 }
 .headerNavBar ul{
+    padding: 0;
     list-style-type: none;
     display: flex;
     white-space: nowrap;
@@ -37,7 +38,8 @@ header p {
     padding: 10px;
 }
 .headerNavBar a {
-    padding: 10px;
+    padding: 40px;
+    text-decoration: none;
 }
 .headerNavBar a:hover {
     background-color: var(--bgColor-main);
@@ -55,11 +57,19 @@ header p {
 @media screen and (max-width: 768px) {
     header {
         flex-direction: column;
-        
     }
     .headerLeft,
     .headerRight {
         display: block;
         text-align: center;
+    }
+    .headerNavBar ul{
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+    }
+
+    .headerNavBar a {
+        padding: 10px;
     }
 }

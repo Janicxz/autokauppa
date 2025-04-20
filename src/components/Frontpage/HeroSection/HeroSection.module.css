@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     background-color: black;
+    background-image: url("https://picsum.photos/1200/400?grayscale&blur=5");
     min-height: 400px;
 }
 .heroHeaderContainer h1 {
