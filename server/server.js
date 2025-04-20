@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const multer = require('multer');
 
 const app = express();
 app.use(cors());
@@ -9,6 +10,8 @@ app.use(cors());
 app.use(bodyParser.json());
 // create application/x-www-form-urlencoded parser
 app.use(bodyParser.urlencoded({ extended: true}));
+
+const upload = multer();
 
 const dbConfig = {
     host: "localhost",
@@ -25,7 +28,25 @@ db.connect((error) => {
     console.log("Connected to MySQL database at " + dbConfig.host);
 });
 
-app.post('/api/addVehicle', (req, res) => {
+app.delete('/api/deleteCar/:id', (req, res) => {
+    console.log(`Got delete request for car id: ${req.params.id}`);
+    if (isNaN(req.params.id)) {
+        console.error("Error, Car id is NaN");
+        return res.status(400).json({ message: "Virheellinen ilmoituksen id"});
+    }
+    const query = "DELETE FROM cars WHERE id = ?";
+    db.query(query, [req.params.id], (err, result) => {
+        if (err) {
+            console.error('Error deleting car from database:', err);
+            res.status(500).json({ message: 'Ilmoituksen tietoja ei voitu poistaa.' });
+        } else {
+            console.log('Ilmoitus poistettu:', result);
+            res.status(200).json({ message: 'Ilmoitus poistettu onnistuneesti.'});
+        }
+    })
+})
+
+app.post('/api/addVehicle', upload.none(), (req, res) => {
     console.log('Got addVehicle request with data: ' + JSON.stringify(req.body));
 
     if (!req.body) {
@@ -34,6 +55,8 @@ app.post('/api/addVehicle', (req, res) => {
     }
 
     let { name, bodyStyle, odometer, transmission, registrationDate, passedInspection, inspectionDate, registrationNumber, description, price } = req.body;
+
+
     if (name === "") {
         console.error('No name provided');
         return res.status(400).json({ message: 'Ajoneuvon nimi puuttuu' });

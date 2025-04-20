@@ -4,16 +4,23 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { UserContext } from '../../hooks/UserContext';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import  AddVehicle  from '../Admin/SalesManagement/AddVehicle/AddVehicle.jsx';
+
 const CarDetails = () => {
+    // Get user state from context (logged in status)
     const { userState, setUserState } = useContext(UserContext);
-    
+    const navigate = useNavigate();
+    // Initialize state
     const [state, setState] = useState({
         carDetails: {},
         carId: 0,
         loading: true,
+        editCarDetails: false,
         error: false
     });
-    // On mount
+
+    // On mount attempt to get car details from backend via API
     useEffect(() => {
         const getCarDetails = async (carId) => {
             let carDetail = {};
@@ -42,7 +49,26 @@ const CarDetails = () => {
 
         getCarDetails(carId);
     }, []);
+    // Handle delete button click
+    const handleDelete = async () => {
+        try {
+            const res = await axios.delete(API_URL + '/deleteCar/' + state.carId);
+            alert("Ilmoitus poistettiin onnistuneesti.");
+            navigate('/onsale');
+        } catch (error) {
+            alert("Ilmoituksen poistaminen epäonnistui.");
+        }
+    }
 
+    const handleEdit = () => {
+        setState(prevState => ({...prevState, editCarDetails: true}));
+    }
+    const handleEditClose = () => {
+        setState(prevState => ({...prevState, editCarDetails: false}));
+
+    }
+
+    // Display errors
     if (state.error) {
         return (
             <div className={styles.CarDetails}>
@@ -50,6 +76,7 @@ const CarDetails = () => {
             </div>
         );
     }
+    // Show loading spinner
     if (state.loading) {
         return (
             <div className={styles.CarDetails}>
@@ -57,8 +84,10 @@ const CarDetails = () => {
             </div>
         );
     }
+    // Return details if everything is ok
     return (
         <div className={styles.CarDetails}>
+            {state.editCarDetails && <AddVehicle onClose={handleEditClose} editMode={true}/>}
             <div className={styles.carDetailsLeft}>
                 <img src="https://placehold.co/400x400"></img>
             </div>
@@ -73,8 +102,8 @@ const CarDetails = () => {
                 {state.carDetails.registrationNumber && <p>Rekisterinumero: {state.carDetails.registrationNumber}</p>}
                 {state.carDetails.price && <p>Hinta: {state.carDetails.price} €</p>}
                 {<div className={styles.carDetailsButtons}>
-                    {/*userState.loggedIn &&*/ <button>Muokkaa ilmoitusta</button>}
-                    {/*userState.loggedIn &&*/ <button>Poista ilmoitus</button>}
+                    {/*userState.loggedIn &&*/ <button onClick={handleEdit}>Muokkaa ilmoitusta</button>}
+                    {/*userState.loggedIn &&*/ <button onClick={handleDelete}>Poista ilmoitus</button>}
                 </div>}
             </div>
         </div>

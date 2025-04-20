@@ -2,16 +2,20 @@
     background-color: var(--bgColor-main);
     color: var(--textColor-main);
     display: flex;
-    padding-left: 5%;
+    justify-content: center;
 }
 .carDetailsLeft {
-    margin: 20px;
+    margin: 20px 0;
+    margin-left: 20px;
 }
 .carDetailsRight {
-    margin: 20px;
+    background-color: var(--bgColor-secondary);
+    margin: 20px 20px 20px 0;
+    padding: 0 20px;
 }
 .carDetailsButtons button{
     margin-right: 10px;
+    margin-bottom: 10px;
     padding: 5px;
 }
 
