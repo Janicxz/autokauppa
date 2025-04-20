@@ -1,9 +1,14 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
 app.use(cors());
+// create application/json parser
+app.use(bodyParser.json());
+// create application/x-www-form-urlencoded parser
+app.use(bodyParser.urlencoded({ extended: true}));
 
 const dbConfig = {
     host: "localhost",
@@ -18,6 +23,30 @@ db.connect((error) => {
         return;
     }
     console.log("Connected to MySQL database at " + dbConfig.host);
+});
+
+app.post('/api/addVehicle', (req, res) => {
+    console.log('Got addVehicle request with data: ' + JSON.stringify(req.body));
+
+    if (!req.body) {
+        console.error('No data received');
+        return res.status(400).json({ message: 'No data received'});
+    }
+
+    let { name, bodyStyle, odometer, transmission, registrationDate, passedInspection, inspectionDate, registrationNumber, description, price } = req.body;
+    if (name === "") {
+        console.error('No name provided');
+        return res.status(400).json({ message: 'Ajoneuvon nimi puuttuu' });
+    }
+    try {
+        price = parseInt(price);
+    } catch {
+        return res.status(400).json({ message: 'Ajoneuvon hinta on virheellinen' });
+    }
+    if (isNaN(price) || price <= 0) {
+        console.error('Price is NaN');
+        return res.status(400).json({ message: 'Ajoneuvon hinta on virheellinen' });
+    }
 });
 
 app.get('/api/carDetails/:id', (req, res) => {

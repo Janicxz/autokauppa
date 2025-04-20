@@ -1,7 +1,47 @@
 .AddVehicle {
-    
+    background-color: var(--bgColor-main);
+    border-radius: var(--borderRadius-main);
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y:auto;
 }
-
+.AddVehicle h3 {
+    text-align: center;
+}
+.AddVehicle form {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.AddVehicle form input {
+    margin: 10px 0;
+    padding: 5px;
+}
+.AddVehicle form textarea {
+    margin: 10px 0;
+    min-width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.AddVehicle form button {
+    padding: 5px;
+    width: 50%;
+}
+.AddVehicleButtons {
+    display: flex;
+    gap: 10px;
+}
 .AddVehicleBackground {
-    background-color: rgba(0,0,0 0.3);
+    background-color: rgba(0,0,0, 0.3);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    z-index: 999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
