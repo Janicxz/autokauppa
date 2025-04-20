@@ -66,15 +66,15 @@ const CarDetails = () => {
                 <h2>{state.carDetails.name}</h2>
                 <p>{state.carDetails.description}</p>
                 {state.carDetails.bodyStyle && <p>Korimalli: {state.carDetails.bodyStyle}</p>}
-                {state.carDetails.inspectionDate && <p>Rekisteröity: {new Date(state.carDetails.registrationDate).toLocaleDateString()}</p>}
+                {state.carDetails.inspectionDate && <p>Ensirekisteröity: {new Date(state.carDetails.registrationDate).toLocaleDateString()}</p>}
                 {state.carDetails.inspectionDate && <p>Katsastettu: {new Date(state.carDetails.inspectionDate).toLocaleDateString()}</p>}
-                {state.carDetails.odometer && <p>Mittarilukema: {state.carDetails.odometer} km</p>}
+                {state.carDetails.odometer > 0 && <p>Mittarilukema: {state.carDetails.odometer} km</p>}
                 {state.carDetails.transmission && <p>Vaihteisto: {state.carDetails.transmission}</p>}
                 {state.carDetails.registrationNumber && <p>Rekisterinumero: {state.carDetails.registrationNumber}</p>}
                 {state.carDetails.price && <p>Hinta: {state.carDetails.price} €</p>}
                 {<div className={styles.carDetailsButtons}>
-                    {userState.loggedIn && <button>Muokkaa ilmoitusta</button>}
-                    {userState.loggedIn && <button>Poista ilmoitus</button>}
+                    {/*userState.loggedIn &&*/ <button>Muokkaa ilmoitusta</button>}
+                    {/*userState.loggedIn &&*/ <button>Poista ilmoitus</button>}
                 </div>}
             </div>
         </div>

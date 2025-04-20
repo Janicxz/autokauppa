@@ -3,6 +3,7 @@
     border-radius: var(--borderRadius-main);
     max-width: 500px;
     width: 100%;
+    height: 99%;
     display: flex;
     flex-direction: column;
     overflow-y:auto;

@@ -16,6 +16,7 @@ import {
 //import PageNavigation from './components/PageNavigation/PageNavigation';
 import SalesManagement from './components/Admin/SalesManagement/SalesManagement';
 import { UserContextProvider } from './hooks/UserContext';
+import AboutPage from './components/AboutPage/AboutPage';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
               <Route path='*' element={<NotFound />}></Route>
               <Route path='/cars' element={<CarDetails />}></Route>
               <Route path='/onsale' element={<OnSalePage />}></Route>
+              <Route path='/about' element={<AboutPage />}></Route>
               <Route path='/admin/salesmanagement' element={<SalesManagement />}></Route>
           </Routes>
           {/*<PageNavigation />*/}

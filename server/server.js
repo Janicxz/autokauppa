@@ -47,6 +47,18 @@ app.post('/api/addVehicle', (req, res) => {
         console.error('Price is NaN');
         return res.status(400).json({ message: 'Ajoneuvon hinta on virheellinen' });
     }
+
+    const query = `INSERT INTO cars (name, description, price, odometer, registrationNumber, registrationDate, inspectionDate, transmission, bodyStyle) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+    const values = [name, description, price, odometer, registrationNumber, registrationDate, inspectionDate, transmission, bodyStyle];
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error('Error inserting car to database:', err);
+            res.status(500).json({ message: 'Uutta ilmoitusta ei voitu lisätä tietokantaan.' });
+        } else {
+            console.log('Ilmoitus lisättiin tietokantaan: ', result);
+            res.status(200).json({ message: 'Ilmoitus lisättiin onnistuneesti.' });
+        }
+    })
 });
 
 app.get('/api/carDetails/:id', (req, res) => {

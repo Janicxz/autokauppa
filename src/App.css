@@ -5,6 +5,12 @@
   background-color: var(--bgColor-main);
   color: var(--textColor-main);
 }
+a {
+  color: inherit;
+}
+a:hover {
+  color: var(--linkColor-hover);
+}
 :root {
   --bgColor-main: #3c5e63;
   --bgColor-secondary: #173836;
