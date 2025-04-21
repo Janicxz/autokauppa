@@ -46,6 +46,40 @@ app.delete('/api/deleteCar/:id', (req, res) => {
     })
 })
 
+app.put('/api/editVehicle/:carId', upload.none(), (req, res) => {
+    console.log('Got editVehicle request with data: ' + JSON.stringify(req.body));
+    const { carId } = req.params;
+    let { name, bodyStyle, odometer, transmission, registrationDate, passedInspection, inspectionDate, registrationNumber, description, price } = req.body;
+
+    if (isNaN(carId) || carId <= 0) {
+        console.error("CarId is invalid " + carId);
+        return;
+    }
+    /*try {
+        console.log("CarId " + carId);
+        carId = parseInt(carId);
+    } catch {
+        console.log("CarId could not be parsed");
+        return res.status(400).json({ message: 'Ajoneuvon id on virheellinen' });
+    }*/
+    if (!req.body) {
+        console.error('No data received');
+        return res.status(400).json({ message: 'No data received'});
+    }
+    const query = "UPDATE cars SET name = ?, description = ?, price = ?, odometer = ?, registrationNumber = ?, registrationDate = ?, inspectionDate = ?, transmission = ?, bodyStyle = ? WHERE id = ?;";
+    const values = [name, description, price, odometer, registrationNumber, registrationDate, inspectionDate, transmission, bodyStyle, carId];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error("Error, failed to update car info " + err);
+            res.status(500).json({ message: 'Ilmoitusta ei voitu muokata.' });
+        } else {
+            console.log("Ilmoitus päivitetty: " + result);
+            res.status(200).json({ message: 'Ilmoitus päivitetty onnistuneesti.' });
+        }
+    });
+})
+
 app.post('/api/addVehicle', upload.none(), (req, res) => {
     console.log('Got addVehicle request with data: ' + JSON.stringify(req.body));
 

@@ -4,16 +4,16 @@ import { useState } from 'react';
 
 import { API_URL } from '../../../../config/config';
 
-const AddVehicle = ({ onClose, editMode, carData }) => {
+const AddVehicle = ({ onClose, editMode, carData, carId }) => {
     const [formData, setFormData] = useState ({
         name: carData ? carData.name : "",
         description: carData ? carData.description : "",
         bodyStyle: carData ? carData.bodyStyle : "",
         odometer: carData ? carData.odometer : "",
         transmission: carData ? carData.transmission: "",
-        registrationDate: carData ? carData.registrationDate : null,
+        registrationDate: carData ? carData.registrationDate.slice(0, 10) : null,
         passedInspection: carData ? carData.passedInspection : false,
-        inspectionDate: carData ? carData.inspectionDate : null,
+        inspectionDate: carData ? carData.inspectionDate.slice(0, 10) : null,
         registrationNumber: carData ? carData.registrationNumber : "",
         price: carData ? carData.price : "",
     });
@@ -38,12 +38,15 @@ const AddVehicle = ({ onClose, editMode, carData }) => {
             alert("Muokattavan ilmoituksen id on virheellinen.");
             return;
         }
+        if (isNaN(carId) || carId <= 0) {
+            console.log("CarId is invalid");
+            return;
+        }
         try {
-            const response = await axios.put(API_URL + "/editVehicle/", new FormData(e.target));
-            alert("Ajoneuvon myynti-ilmoitus lisättiin onnistuneesti.");
+            const response = await axios.put(API_URL + "/editVehicle/" + carId, new FormData(e.target));
             onClose();
         } catch (error) {
-            alert("Ajoneuvon myynti-ilmoitusta ei voitu lisätä.\nTarkista, että syötit vaaditut tiedot oikein.");
+            alert("Ajoneuvon myynti-ilmoitusta ei voitu muokata.\nTarkista, että syötit vaaditut tiedot oikein.");
         }
     }
 
@@ -52,7 +55,7 @@ const AddVehicle = ({ onClose, editMode, carData }) => {
         editMode ? putEditVehicle(e) : postAddVehicle(e);
         return false;
     }
-    
+
     return (
         <>
         <div className={styles.AddVehicleBackground}> </div>
@@ -61,33 +64,33 @@ const AddVehicle = ({ onClose, editMode, carData }) => {
                     <h3>{editMode ? "Muokkaa ilmoituksen tietoja" : "Lisää myytävä ajoneuvo"}</h3>
                     <form action={API_URL + "/addVehicle"} onSubmit={handleSubmit} method='POST'>
                         <label htmlFor='name'>Nimi:</label>
-                        <input type='text' name='name'></input>
+                        <input type='text' name='name' value={formData.name} onChange={(e) => {setFormData({...formData, name: e.target.value})}}></input>
 
                         <label htmlFor='bodyStyle'>Korimalli:</label>
-                        <input type='text' name='bodyStyle'></input>
+                        <input type='text' name='bodyStyle' value={formData.bodyStyle} onChange={(e) => {setFormData({...formData, bodyStyle: e.target.value})}}></input>
 
                         <label htmlFor='odometer'>Mittarilukema:</label>
-                        <input type='number' name='odometer'></input>
+                        <input type='number' name='odometer' value={formData.odometer} onChange={(e) => {setFormData({...formData, odometer: e.target.value})}}></input>
                         <label htmlFor='transmission'>Vaihteisto:</label>
-                        <input type='text' name='transmission'></input>
+                        <input type='text' name='transmission' value={formData.transmission} onChange={(e) => {setFormData({...formData, transmission: e.target.value})}}></input>
 
                         <label htmlFor='registrationDate'>Ensirekisteröinti pvm:</label>
-                        <input type='date' name='registrationDate'></input>
+                        <input type='date' name='registrationDate' value={formData.registrationDate} onChange={(e) => {setFormData({...formData, registrationDate: e.target.value})}}></input>
                         <div>
                             <label htmlFor='passedInspection'>Katsastettu: </label>
-                            <input type='checkbox' name='passedInspection'></input>
+                            <input type='checkbox' name='passedInspection' value={formData.passedInspection} onChange={(e) => {setFormData({...formData, passedInspection: e.target.value})}}></input>
                         </div>
                         <label htmlFor='inspectionDate'>Katsastus pvm:</label>
-                        <input type='date' name='inspectionDate'></input>
+                        <input type='date' name='inspectionDate' value={formData.inspectionDate} onChange={(e) => {setFormData({...formData, inspectionDate: e.target.value})}}></input>
 
                         <label htmlFor='registrationNumber'>Rekisterinumero:</label>
-                        <input type='text' name='registrationNumber'></input>
+                        <input type='text' name='registrationNumber' value={formData.registrationNumber} onChange={(e) => {setFormData({...formData, registrationNumber: e.target.value})}}></input>
 
                         <label htmlFor='description'>Lisätietoja:</label>
-                        <textarea rows='7' name='description'></textarea>
+                        <textarea rows='7' name='description' value={formData.description} onChange={(e) => {setFormData({...formData, description: e.target.value})}}></textarea>
 
                         <label htmlFor='price'>Hinta €:</label>
-                        <input type='number' name='price'></input>
+                        <input type='number' name='price' value={formData.price} onChange={(e) => {setFormData({...formData, price: e.target.value})}}></input>
                         <div className={styles.AddVehicleButtons}>
                             <button>Lähetä</button>
                             <button onClick={handleCloseClick}>Sulje</button>

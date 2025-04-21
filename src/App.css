@@ -1,7 +1,7 @@
 .App {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  height: 100vh;
   background-color: var(--bgColor-main);
   color: var(--textColor-main);
 }

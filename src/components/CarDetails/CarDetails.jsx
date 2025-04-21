@@ -19,24 +19,25 @@ const CarDetails = () => {
         editCarDetails: false,
         error: false
     });
-
+    const fetchCarDetails = async(carId) => {
+        let carDetail = {};
+        let apiError = false;
+        let errorMsg = '';
+        try {
+            const res = await axios.get(API_URL + '/carDetails/' + carId);
+            carDetail = res.data[0];
+            //console.log("Got car details: " + carDetail);
+        } catch (error) {
+            //console.error('Error fetching cars:', error);
+            apiError = true;
+            errorMsg = 'Virhe auton tietojen lataamisessa.';
+        }
+        setState(prevState => ({ ...prevState, loading: false, carDetails: carDetail, carId: carId, error: apiError, errorMessage: errorMsg }));
+    }
     // On mount attempt to get car details from backend via API
     useEffect(() => {
         const getCarDetails = async (carId) => {
-            let carDetail = {};
-            let apiError = false;
-            let errorMsg = '';
-            console.log(`Getting car details: ${carId}`);
-            try {
-                const res = await axios.get(API_URL + '/carDetails/' + carId);
-                carDetail = res.data[0];
-                console.log("Got car details: " + carDetail);
-            } catch (error) {
-                console.error('Error fetching cars:', error);
-                apiError = true;
-                errorMsg = 'Virhe auton tietojen lataamisessa.';
-            }
-            setState(prevState => ({ ...prevState, loading: false, carDetails: carDetail, carId: carId, error: apiError, errorMessage: errorMsg }));
+            fetchCarDetails(carId);
         }
         let carId = new URLSearchParams(window.location.search).get('id');
         carId = parseInt(carId);
@@ -65,7 +66,7 @@ const CarDetails = () => {
     }
     const handleEditClose = () => {
         setState(prevState => ({...prevState, editCarDetails: false}));
-
+        fetchCarDetails(state.carId);
     }
 
     // Display errors
@@ -87,7 +88,7 @@ const CarDetails = () => {
     // Return details if everything is ok
     return (
         <div className={styles.CarDetails}>
-            {state.editCarDetails && <AddVehicle onClose={handleEditClose} editMode={true}/>}
+            {state.editCarDetails && <AddVehicle onClose={handleEditClose} editMode={true} carData={state.carDetails} carId={state.carId}/>}
             <div className={styles.carDetailsLeft}>
                 <img src="https://placehold.co/400x400"></img>
             </div>
