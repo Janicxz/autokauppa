@@ -54,7 +54,9 @@ const AddVehicle = ({ onClose, editMode, carData }) => {
     }
     
     return (
-        <div className={styles.AddVehicleBackground}>
+        <>
+        <div className={styles.AddVehicleBackground}> </div>
+        <div className={styles.AddVehicleContainer}>
             <div className={styles.AddVehicle}>
                     <h3>{editMode ? "Muokkaa ilmoituksen tietoja" : "Lisää myytävä ajoneuvo"}</h3>
                     <form action={API_URL + "/addVehicle"} onSubmit={handleSubmit} method='POST'>
@@ -93,6 +95,7 @@ const AddVehicle = ({ onClose, editMode, carData }) => {
                     </form>
             </div>
         </div>
+        </>
     );
 }
 export default AddVehicle;
