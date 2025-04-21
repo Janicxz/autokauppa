@@ -11,9 +11,9 @@ const AddVehicle = ({ onClose, editMode, carData, carId }) => {
         bodyStyle: carData ? carData.bodyStyle : "",
         odometer: carData ? carData.odometer : "",
         transmission: carData ? carData.transmission: "",
-        registrationDate: carData ? carData.registrationDate.slice(0, 10) : null,
+        registrationDate: carData ? carData.registrationDate.slice(0, 10) : "",
         passedInspection: carData ? carData.passedInspection : false,
-        inspectionDate: carData ? carData.inspectionDate.slice(0, 10) : null,
+        inspectionDate: carData ? carData.inspectionDate.slice(0, 10) : "",
         registrationNumber: carData ? carData.registrationNumber : "",
         price: carData ? carData.price : "",
     });

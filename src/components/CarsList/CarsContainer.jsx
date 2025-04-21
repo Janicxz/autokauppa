@@ -16,7 +16,7 @@ const CarsContainer = () => {
         errorMessage: ""
     });
 
-    // On init
+    // On mount
     useEffect(() => {
         const getCars = async () => {
             let carsList = [];
@@ -25,7 +25,7 @@ const CarsContainer = () => {
             try {
                 const res = await axios.get(API_URL + '/CarsList');
                 carsList = res.data;
-                console.log("Got cars list: " + carsList);
+                //console.log("Got cars list: " + carsList);
             } catch (error) {
                 console.error('Error fetching cars:', error);
                 apiError = true;

@@ -13,7 +13,7 @@ const AboutPage = () => {
                 width="100%"
                 height="450"
                 frameBorder="0"
-                allowFullscreen=""
+                allowFullScreen=""
                 aria-hidden="false"
                 tabIndex="0"
             />

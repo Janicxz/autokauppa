@@ -5,8 +5,10 @@
 .CarCardText {
     text-align: center;
 }
-.CarCardText h3,
-.CarCardText p {
-    
+.CarCardLink {
     color: var(--textColor-main);
+    text-decoration: none;
+}
+.CarCardLink:hover {
+    color: var(--linkColor-hover);
 }
