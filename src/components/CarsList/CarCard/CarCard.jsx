@@ -8,7 +8,7 @@ const CarCard = ({carData}) => {
             <img src="https://placehold.co/250x150" alt=""></img>
             <div className={styles.CarCardText}>
                 <h3>{carData.name} | {new Date(carData.registrationDate).getFullYear()}</h3>
-                <p>{carData.bodyStyle}, {carData.transmission}</p>
+                <p>{carData.body_style_name}, {carData.transmission_name}</p>
                 <p>{carData.odometer} km</p>
                 <p>{carData.price} €</p>
             </div>

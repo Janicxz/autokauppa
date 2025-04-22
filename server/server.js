@@ -121,13 +121,49 @@ app.post('/api/addVehicle', upload.none(), (req, res) => {
 app.get('/api/carDetails/:id', (req, res) => {
     const { id } = req.params;
     console.log(`Got request for car details with id: ${id}`);
-    const query = `SELECT * FROM cars WHERE id = ?`;
+    //const query = `SELECT * FROM cars WHERE id = ?`;
+    const query = `
+    SELECT cars.*, t.name AS transmission_name, bs.name AS body_style_name
+    FROM cars
+    INNER JOIN
+    transmissions t ON t.id=cars.transmission_id
+    INNER JOIN body_styles bs ON bs.id=cars.bodystyle_id;`;
     db.query(query, [id], (err, results) => {
         if (err) {
             console.error('Error fetching car details from database:', err);
             res.status(500).json({ message: 'Auton tietoja ei löytynyt.' });
         } else {
             console.log('Car details fetched from database:', results);
+            res.json(results);
+        }
+    });
+});
+
+app.get('/api/bodystyles', (req, res) => {
+    console.log('Got request for transmission types');
+    const query = `
+    SELECT * FROM body_styles;`;
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching bodystyles from database:', err);
+            res.status(500).json({ message: 'Korimallin tietoja ei löytynyt.' });
+        } else {
+            console.log('Car bodystyles fetched from database:', results);
+            res.json(results);
+        }
+    });
+});
+
+app.get('/api/transmissions', (req, res) => {
+    console.log('Got request for transmission types');
+    const query = `
+    SELECT * FROM transmissions;`;
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching transmissions from database:', err);
+            res.status(500).json({ message: 'Vaihteiston tietoja ei löytynyt.' });
+        } else {
+            console.log('Car transmissions fetched from database:', results);
             res.json(results);
         }
     });
@@ -159,7 +195,14 @@ app.get('/api/CarsList', (req, res) => {
         { name: "suzuki", description: "Vitara", price: 23400 },
         { name: "land rover", description: "Defender", price: 24400 }
     ];*/
-    db.query("SELECT * FROM cars", (err, result) => {
+    // SELECT * FROM cars
+    const query = `
+    SELECT cars.*, t.name AS transmission_name, bs.name AS body_style_name
+    FROM cars
+    INNER JOIN
+    transmissions t ON t.id=cars.transmission_id
+    INNER JOIN body_styles bs ON bs.id=cars.bodystyle_id;`;
+    db.query(query, (err, result) => {
         if (err) {
             console.error('Error fetching cars from database:', err);
             res.status(500).json({ message: 'Myynnissä olevia autoja ei löytynyt.'});

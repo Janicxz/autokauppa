@@ -17,6 +17,8 @@ const AddVehicle = ({ onClose, editMode, carData, carId }) => {
         registrationNumber: carData ? carData.registrationNumber : "",
         price: carData ? carData.price : "",
     });
+    const [bodyStyles, setBodyStyles] = useState([]);
+    const [transmissions, setTransmissions] = useState([]);
     
     const handleCloseClick = (e) => {
         e.preventDefault();
