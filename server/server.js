@@ -127,7 +127,7 @@ app.get('/api/carDetails/:id', (req, res) => {
     FROM cars
     INNER JOIN
     transmissions t ON t.id=cars.transmission_id
-    INNER JOIN body_styles bs ON bs.id=cars.bodystyle_id;`;
+    INNER JOIN body_styles bs ON bs.id=cars.bodystyle_id WHERE cars.id = ?;`;
     db.query(query, [id], (err, results) => {
         if (err) {
             console.error('Error fetching car details from database:', err);

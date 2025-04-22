@@ -96,7 +96,7 @@ const CarDetails = () => {
                 <h2>{state.carDetails.name}</h2>
                 <p>{state.carDetails.description}</p>
                 {state.carDetails.body_style_name && <p>Korimalli: {state.carDetails.body_style_name}</p>}
-                {state.carDetails.inspectionDate && <p>Ensirekisteröity: {new Date(state.carDetails.registrationDate).toLocaleDateString()}</p>}
+                {state.carDetails.registrationDate && <p>Ensirekisteröity: {new Date(state.carDetails.registrationDate).toLocaleDateString()}</p>}
                 {state.carDetails.inspectionDate && <p>Katsastettu: {new Date(state.carDetails.inspectionDate).toLocaleDateString()}</p>}
                 {state.carDetails.odometer > 0 && <p>Mittarilukema: {state.carDetails.odometer} km</p>}
                 {state.carDetails.transmission_name && <p>Vaihteisto: {state.carDetails.transmission_name}</p>}

@@ -1,6 +1,6 @@
 import styles from './AddVehicle.module.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { API_URL } from '../../../../config/config';
 
@@ -19,12 +19,37 @@ const AddVehicle = ({ onClose, editMode, carData, carId }) => {
     });
     const [bodyStyles, setBodyStyles] = useState([]);
     const [transmissions, setTransmissions] = useState([]);
-    
+
     const handleCloseClick = (e) => {
         e.preventDefault();
         onClose();
         return false;
     }
+    // On mount
+    useEffect(() => {
+        const getBodyStyles = async () => {
+            try {
+                const res = await axios.get(API_URL + '/bodystyles');
+                setBodyStyles(res.data);
+               //console.log("Got bodystyles: " + res.data);
+            } catch (err) {
+                console.log("Error fetching bodystyles" + err);
+                return;
+            }
+        }
+        const getTransmissions = async () => {
+            try {
+                const res = await axios.get(API_URL + '/transmissions');
+                setTransmissions(res.data);
+                //console.log("Got transmissions: " + res.data);
+            } catch (err) {
+                console.log("Error fetching transmissions" + err);
+                return;
+            }
+        }
+        getBodyStyles();
+        getTransmissions();
+    }, []);
 
     const postAddVehicle = async (e) => {
         try {
@@ -73,6 +98,8 @@ const AddVehicle = ({ onClose, editMode, carData, carId }) => {
 
                         <label htmlFor='odometer'>Mittarilukema:</label>
                         <input type='number' name='odometer' value={formData.odometer} onChange={(e) => {setFormData({...formData, odometer: e.target.value})}}></input>
+                        {/* TODO: Add <select> here for transmission and bodystyle dropdown select. change transmission to transmission_name.
+                        select by transmissions.map => (), show <option value={transmissions.id}>{transmissions.name}</option>*/}
                         <label htmlFor='transmission'>Vaihteisto:</label>
                         <input type='text' name='transmission' value={formData.transmission} onChange={(e) => {setFormData({...formData, transmission: e.target.value})}}></input>
 
